@@ -5,6 +5,13 @@ import { useEffect } from "react";
 import Footer from "../components/footer";
 import dynamic from "next/dynamic";
 import TawkTo from "tawkto-react";
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from "recoil";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const Navbar = dynamic(() => import("../components/navbar"), {
@@ -30,13 +37,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     setInterval(removeBranding, tick);
   }, []);
   return (
-    <>
+    <RecoilRoot>
       <Navbar />
       <main className="max-w-8xl mx-auto">
         <Component {...pageProps} />
       </main>
       <Footer />
-    </>
+    </RecoilRoot>
   );
 }
 

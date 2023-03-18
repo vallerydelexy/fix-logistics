@@ -3,10 +3,14 @@ import { useLocalStorage } from "usehooks-ts";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import qs from "qs";
+import { useRecoilState } from "recoil";
+import { resultState } from "../atom/ResultAtom";
+import { requestState } from "../atom/requestAtom";
 
 export default function PricingTab() {
+  const [formRequest, setFormRequest] = useRecoilState(requestState)
   const [theme, setTheme] = useLocalStorage("theme", "business");
-  const [tarif, setTarifs] = useState([]);
+  const [tarif, setTarifs] = useRecoilState(resultState)
   const [isFormValid, setIsFormValid] = useState(false);
   const [provinsi, setProvinsi] = useState([]);
   const [formCekTarif, setFormCekTarif] = useState({});
@@ -32,28 +36,30 @@ export default function PricingTab() {
             $eq: type
           }
         },
+        populate: "*"
       },
       {
         encodeValuesOnly: true, // prettify URL
       }
     );
+    
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API}/tarifs?${query}`
     );
-    setTarifs(res.data.data);
+    setTarifs(res.data);
+    console.log(`${process.env.NEXT_PUBLIC_API}/tarifs?${query}`)
   }
 
   useEffect(() => {
     getProvinsi();
   }, []);
 
-  console.log(tarif);
   const availableProvince = provinsi?.map((item) => ({
     label: item?.attributes.nama,
     value: item?.attributes.nama,
   }));
   const tarifType = [
-    { label: "kiloan", value: "weight" },
+    { label: "kiloan", value: "kilogram" },
     { label: "chartered", value: "chartered" },
   ];
 
@@ -89,16 +95,20 @@ export default function PricingTab() {
 
     // Form is valid, proceed with the rest of the logic
     setIsFormValid(true);
+    setFormRequest({
+      asal: formCekTarif.asal,
+      tujuan: formCekTarif.tujuan,
+      type: formCekTarif.tipe || "kilogram",
+      weight: formCekTarif.weight || 1
+    })
     getTarifs({
       asal: formCekTarif.asal,
       tujuan: formCekTarif.tujuan,
-      type: formCekTarif.tipe || "weight",
+      type: formCekTarif.tipe || "kilogram",
     });
-    console.log(formCekTarif);
   }
-  console.log(formCekTarif);
   return (
-    <>
+    <section className="flex flex-col">
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Jenis tarif</span>
@@ -172,6 +182,6 @@ export default function PricingTab() {
           Cek sekarang
         </button>
       </div>
-    </>
+    </section>
   );
 }

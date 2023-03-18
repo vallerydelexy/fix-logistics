@@ -16,9 +16,9 @@
     },
     "tarifs": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::tarif.tarif",
-      "mappedBy": "vehicles"
+      "mappedBy": "vehicle"
     }
   }
 }

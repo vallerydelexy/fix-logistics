@@ -36,9 +36,9 @@
       "default": "kilogram",
       "required": true
     },
-    "vehicles": {
+    "vehicle": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::vehicle.vehicle",
       "inversedBy": "tarifs"
     }
