@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "awbs",
+  "info": {
+    "singularName": "awb",
+    "pluralName": "awbs",
+    "displayName": "awb"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "number": {
+      "type": "biginteger",
+      "unique": true
+    }
+  }
+}

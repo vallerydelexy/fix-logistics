@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "provinsis",
+  "info": {
+    "singularName": "provinsi",
+    "pluralName": "provinsis",
+    "displayName": "provinsi"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nama": {
+      "type": "string"
+    },
+    "tarifs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tarif.tarif",
+      "mappedBy": "tujuan"
+    }
+  }
+}

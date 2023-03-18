@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kotas",
+  "info": {
+    "singularName": "kota",
+    "pluralName": "kotas",
+    "displayName": "kota"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nama": {
+      "type": "string"
+    }
+  }
+}

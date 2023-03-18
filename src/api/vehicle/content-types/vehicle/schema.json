@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vehicles",
+  "info": {
+    "singularName": "vehicle",
+    "pluralName": "vehicles",
+    "displayName": "vehicle"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "tarifs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tarif.tarif",
+      "mappedBy": "vehicles"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tarifs",
+  "info": {
+    "singularName": "tarif",
+    "pluralName": "tarifs",
+    "displayName": "tarif",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "harga": {
+      "type": "float"
+    },
+    "asal": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::provinsi.provinsi",
+      "inversedBy": "tarifs"
+    },
+    "tujuan": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::provinsi.provinsi",
+      "inversedBy": "tarifs"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "kilogram",
+        "chartered"
+      ],
+      "default": "kilogram",
+      "required": true
+    },
+    "vehicles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::vehicle.vehicle",
+      "inversedBy": "tarifs"
+    }
+  }
+}
